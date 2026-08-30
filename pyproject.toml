@@ -1,0 +1,58 @@
+[project]
+name = "iconcode-og-audit"
+version = "0.1.0"
+description = "Audit SEO, Open Graph, robots, JSON-LD and sitemap metadata from the command line."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "IconCode", email = "support@iconcode.ru" }]
+keywords = ["seo", "open-graph", "json-ld", "sitemap", "cli"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Internet :: WWW/HTTP :: Site Management",
+]
+dependencies = [
+  "beautifulsoup4>=4.13,<5",
+  "defusedxml>=0.7,<1",
+  "httpx>=0.28,<1",
+  "pydantic>=2.11,<3",
+  "rich>=14,<15",
+  "typer>=0.16,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.4,<9",
+  "pytest-asyncio>=1.1,<2",
+  "ruff>=0.12,<1",
+]
+
+[project.scripts]
+og-audit = "og_audit.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/IconcodeAgency/og-audit"
+Issues = "https://github.com/IconcodeAgency/og-audit/issues"
+Source = "https://github.com/IconcodeAgency/og-audit"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/og_audit"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
